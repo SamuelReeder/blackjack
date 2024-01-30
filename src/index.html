@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blackjack Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        #gameArea {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+        .hand {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+        .card {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #999;
+            background-color: #eee;
+        }
+        .button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameArea">
+        <h2>Blackjack Game</h2>
+        <div id="dealerHand" class="hand">
+            <h3>Dealer's Hand</h3>
+            <!-- Cards will be added here -->
+        </div>
+        <div id="playerHand" class="hand">
+            <h3>Your Hand</h3>
+            <!-- Cards will be added here -->
+        </div>
+        <div id="gameControls">
+            <button class="button" onclick="hit()">Hit</button>
+            <button class="button" onclick="stand()">Stand</button>
+        </div>
+        <div id="gameStatus">
+            <!-- Game messages will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to interact with the server and manage game state
+        function hit() {
+            // Implement hit action
+        }
+
+        function stand() {
+            // Implement stand action
+        }
+    </script>
+</body>
+</html>
