@@ -34,12 +34,18 @@ class Hand:
         self.cards = []
         self.value = 0
         
-    def display(self) -> None:
+    def display(self, hide: bool = True) -> None:
         if self.dealer:
-            print("hidden")
-            print(self.cards[1].rank, self.cards[1].suit)
-            if self.cards[1].rank == "A":
-                self.insurance_possible = True
+            if hide:
+                print("hidden")
+                print(self.cards[1].rank, self.cards[1].suit)
+                if self.cards[1].rank == "A":
+                    self.insurance_possible = True
+                return 
+            for card in self.cards:
+                print(card.rank, card.suit, end=" ")
+            print("Value:", self.get_value())
+            
                 
         else:
             for card in self.cards:

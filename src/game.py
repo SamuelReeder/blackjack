@@ -5,6 +5,9 @@ from typing import List
 from entities import Player
 
 
+
+# TODO: hit for dealer  
+# 
 class Game:
     
     def __init__(self, players: int = 1):
@@ -61,10 +64,11 @@ class Game:
                     self.players[0].change_balance(-bet / 2)
 
             game_over = False
-
+            first = True
+            
             while not game_over:
                 player_has_blackjack, dealer_has_blackjack = self.check_for_blackjack()
-                if player_has_blackjack or dealer_has_blackjack:
+                if player_has_blackjack:
                     game_over = True
                     self.show_blackjack_results(player_has_blackjack, dealer_has_blackjack)
                     continue
@@ -78,15 +82,33 @@ class Game:
                     if self.player_is_over():
                         print("You have lost!")
                         game_over = True
+                        
+                    # dealer hits until 17 or over
+                    
                 else:
+                    
+                    while self.dealer_hand.get_value() < 17:
+                        self.dealer_hand.add_card(self.deck.deal())
+                    print("Dealer's Hand:")
+                    self.dealer_hand.display(hide=False)
+                        
                     player_hand_value = self.players[0].hand.get_value()
                     dealer_hand_value = self.dealer_hand.get_value()
+                    
+                    player_blackjack, dealer_blackjack = self.check_for_blackjack()
+                    if player_blackjack and dealer_blackjack:
+                        game_over = True
+                        self.show_blackjack_results(player_has_blackjack, dealer_has_blackjack)
+                        continue
 
                     print("Final Results")
                     print("Your hand:", player_hand_value)
                     print("Dealer's hand:", dealer_hand_value)
 
-                    if player_hand_value > dealer_hand_value:
+                    if self.dealer_hand.get_value() > 21:
+                        print("Dealer busts! You win!")
+                        self.players[0].change_balance(bet * 2)
+                    elif player_hand_value > dealer_hand_value:
                         print("You Win!")
                         self.players[0].change_balance(bet * 2)
                     elif player_hand_value == dealer_hand_value:
