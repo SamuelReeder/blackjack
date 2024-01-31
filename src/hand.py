@@ -5,24 +5,25 @@ class Hand:
         self.dealer = dealer
         self.cards = []
         self.value = 0
+        self.has_ace = False
+        self.insurance_possible = False
 
     def add_card(self, card: Card) -> None:
         self.cards.append(card)
     
     def calculate_value(self) -> None:
         self.value = 0
-        has_ace = False
         for card in self.cards:
             if card.rank.isnumeric():
                 self.value += int(card.rank)
             else:
                 if card.rank == "A":
-                    has_ace = True
+                    self.has_ace = True
                     self.value += 11
                 else:
                     self.value += 10
 
-        if has_ace and self.value > 21:
+        if self.has_ace and self.value > 21:
             self.value -= 10
 
     def get_value(self) -> int:
@@ -37,6 +38,9 @@ class Hand:
         if self.dealer:
             print("hidden")
             print(self.cards[1].rank, self.cards[1].suit)
+            if self.cards[1].rank == "A":
+                self.insurance_possible = True
+                
         else:
             for card in self.cards:
                 print(card.rank, card.suit, end=" ")

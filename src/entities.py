@@ -4,6 +4,8 @@ class Player:
     def __init__(self, balance: int = 1000):
         self.hand = Hand()
         self.balance = balance
+        self.bet = 0
+        self.insurance = False
     def change_balance(self, amount: int) -> None:
         self.balance += amount
 
